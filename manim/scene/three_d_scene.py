@@ -10,6 +10,7 @@ from ..constants import DEGREES
 from ..mobject.coordinate_systems import ThreeDAxes
 from ..mobject.geometry import Line
 from ..mobject.three_dimensions import Sphere
+from ..mobject.three_dimensions import Torus
 from ..mobject.types.vectorized_mobject import VGroup
 from ..mobject.types.vectorized_mobject import VectorizedPoint
 from ..mobject.value_tracker import ValueTracker

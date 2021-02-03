@@ -22,6 +22,10 @@ Finally, after having cloned this repo, run the following:
 
    python3 -m pip install .
 
+NOTE: manim primarily uses poetry for installation and development.  You must have pip >= 19.1
+for the above command to work.  As of this writing, pip does not support an editable install
+(using ``-e``) with poetry-based projects.
+
 Please see :doc:`contributing` for more details about contributing to Manim.
 
 .. warning::

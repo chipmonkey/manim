@@ -1,6 +1,6 @@
 """Three-dimensional mobjects."""
 
-__all__ = ["ThreeDVMobject", "ParametricSurface", "Sphere", "Cube", "Prism"]
+__all__ = ["ThreeDVMobject", "ParametricSurface", "Sphere", "Cube", "Prism", "Torus"]
 
 from ..constants import *
 from ..mobject.geometry import Square
@@ -131,6 +131,8 @@ class Sphere(ParametricSurface):
         v_max=TAU,
         **kwargs
     ):
+        self.radius = radius
+        self.scale(self.radius)
         ParametricSurface.__init__(
             self,
             self.func,
@@ -141,14 +143,43 @@ class Sphere(ParametricSurface):
             v_max=v_max,
             **kwargs
         )
-        self.radius = radius
-        self.scale(self.radius)
+
 
     def func(
         self, u, v
     ):  # FIXME: An attribute defined in manim.mobject.three_dimensions line 56 hides this method
         return np.array([np.cos(v) * np.sin(u), np.sin(v) * np.sin(u), np.cos(u)])
 
+
+class Torus(ParametricSurface):
+    def __init__(
+        self,
+        r1=2,
+        r2=1,
+        resolution=(12, 24),
+        u_min=0.001,
+        u_max=TAU,
+        v_min=0,
+        v_max=TAU,
+        **kwargs
+    ):
+        self.r1 = r1
+        self.r2 = r2
+        ParametricSurface.__init__(
+            self,
+            self.func,
+            resolution=resolution,
+            u_min=u_min,
+            u_max=u_max,
+            v_min=v_min,
+            v_max=v_max,
+            **kwargs
+        )
+        self.scale(self.r1)
+
+    def func(self, u, v):
+        P = np.array([np.cos(u), np.sin(u), 0])
+        return (self.r1 - self.r2 * np.cos(v)) * P - np.sin(v) * OUT
 
 class Cube(VGroup):
     def __init__(

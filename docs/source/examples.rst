@@ -503,6 +503,7 @@ Special Camera Settings
     class ThreeDLightSourcePosition(ThreeDScene):
         def construct(self):
             axes = ThreeDAxes()
+            # To manually describe a parametric surface like a Sphere:
             sphere = ParametricSurface(
                 lambda u, v: np.array([
                     1.5 * np.cos(u) * np.cos(v),
@@ -511,9 +512,11 @@ Special Camera Settings
                 ]), v_min=0, v_max=TAU, u_min=-PI / 2, u_max=PI / 2,
                 checkerboard_colors=[RED_D, RED_E], resolution=(15, 32)
             )
+            # To use one of the built-in surfaces (i.e. Sphere, Torus):
+            torus = Torus()
             self.renderer.camera.light_source.move_to(3*IN) # changes the source of the light
             self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
-            self.add(axes, sphere)
+            self.add(axes, sphere, torus)
 
 .. manim:: ThreeDCameraRotation
     :ref_classes: ThreeDScene ThreeDAxes
